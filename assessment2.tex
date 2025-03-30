@@ -5,6 +5,8 @@
 \usepackage{enumitem}
 \usepackage{titlesec}
 \usepackage{times}
+\usepackage{longtable}
+\usepackage{apacite}
 
 
 \begin{document}
@@ -22,7 +24,7 @@ In large-scale wind farms, how does a CNN autoencoder-based Normal Behaviour Mon
 \section{Search Query (5 marks)}
 Here are queries that I used to search for articles related to the research question:
 \begin{itemize}
-    \item windturbine AND (normal behavior monitoring OR anomaly detection)
+    \item wind turbine AND (normal behavior monitoring OR anomaly detection)
     \item "(CNN OR LSTM) AND autoencoder"
 \end{itemize}
 
@@ -31,72 +33,92 @@ Here are queries that I used to search for articles related to the research ques
 
 The mapping of the articles is presented in Table \ref{tab:article_mapping}.
 
-\begin{table}
-    \caption{Mapping of Articles}
-    \label{tab:article_mapping}
-    \centering
-    \begin{tabular}{
-        |p{0.2\linewidth}
-        |p{0.13\linewidth}
-        |p{0.1\linewidth}
-        |p{0.2\linewidth}
-        |p{0.2\linewidth}
-        |p{0.13\linewidth}|
-    }
-        \hline
-        \textbf{Article} & 
-        \textbf{Categories} &
-        \textbf{Dataset} &
-        \textbf{Methodology} &
-        \textbf{Findings} &
-        \textbf{Limitations} \\
-        \hline
-        
-        % First article
-        Analytical investigation of autoencoder-based methods for unsupervised anomaly detection in building energy data \cite{fan_analytical_2018} &
-        Framework &
-        Private dataset &
-        Compare simple CNN and RNN performance with different augmentation techniques &
-        Proposed adding noise to the train data, methods to evaluate the AE performance &
-        Tested models are small, dataset is closely related to wind turbine \\
-        \hline
+\begin{longtable}{
+    |p{0.2\linewidth}
+    |p{0.13\linewidth}
+    |p{0.1\linewidth}
+    |p{0.2\linewidth}
+    |p{0.2\linewidth}
+    |p{0.13\linewidth}|
+}
+    \caption{Mapping of Articles} 
+    \label{tab:article_mapping} \\
+    
+    \hline
+    \textbf{Article} & 
+    \textbf{Categories} &
+    \textbf{Dataset} &
+    \textbf{Methodology} &
+    \textbf{Findings} &
+    \textbf{Limitations} \\
+    \hline
+    \endfirsthead
+    
+    \hline
+    \textbf{Article} & 
+    \textbf{Categories} &
+    \textbf{Dataset} &
+    \textbf{Methodology} &
+    \textbf{Findings} &
+    \textbf{Limitations} \\
+    \hline
+    \endhead
+    
+    \hline
+    \endfoot
+    
+    \hline
+    \endlastfoot
+    
+    Analytical investigation of autoencoder-based methods for unsupervised anomaly detection in building energy data \cite{fan_analytical_2018} &
+    Framework &
+    Private dataset &
+    Compare simple CNN and RNN performance with different augmentation techniques &
+    Proposed adding noise to the train data, methods to evaluate the AE performance &
+    Tested models are small, dataset is closely related to wind turbine \\
+    \hline
+    
+    Anomaly detection and fault analysis of wind turbine components based on deep learning network \cite{zhao_anomaly_2018} & 
+    Multi-phrase training & 
+    SCADA & 
+    Pre-train the RBM model unsupervised then add supervised layers for fine tuning using labels & 
+    Adaptive thresholds derived from extreme value theory helps reduce false positive. The model is 20\% faster in term of inference time and 60\% faster in term of early predicting (10h) &
+    The compared NN model is simple FCNN \\
+    \hline
+    
+    Autoencoder-based Condition Monitoring and Anomaly Detection Method for Rotating Machines \cite{ahmad_autoencoder-based_2020}&
+    LSTM, Framework & 
+    NASA bearing dataset & 
+    Use LSTM AE to extract features and then use Gaussian model and Mahalanobis distance to determine if abnormal &
+    Use Isolation Forest model to evaluate high level features extracted (vs base data). High F1 score of 0.996 & 
+    Does not show/describe the model structure. The dataset is not closely related \\
+    \hline
+    
+    Transfer learning applications for autoencoder-based anomaly detection in wind turbines \cite{roelofs_transfer_2024} & 
+    Multi-phrase training & 
+    SCADA & 
+    Train model on 1-year of common turbines data then tune the model by 1, 2 or 3-month data of the target data &
+    For transfer learning, tuning the model threshold is sufficient. Tuning the whole model or just the decoder only brings considerable improvement & 
+    The models tested are simple FCNN model \\
+    \hline
 
-        % Second article
-        Anomaly detection and fault analysis of wind turbine components based on deep learning network \cite{zhao_anomaly_2018} & 
-        Multi-phrase training & 
-        SCADA & 
-        Pretrain the RBM model unsupervised then add supervised layers for fine tuning using labels & 
-        Adaptive thresholds derived from extreme value theory helps reduce false positive. The model is 20\% faster in term of inference time and 60\% faster in term of early predicting (10h) &
-        The compared NN model is simple FCNN \\
-        \hline
+    Wind Turbine Anomaly Detection Using Mahalanobis Distance and SCADA Alarm Data \cite{liu_wind_2022} &
+    Machine learning &
+    SCADA &
+    First, use FCNN as autoencoder to extract features, then use Mahalanobis distance to determine if abnormal &
+    The model can explain the anomaly in each component &
+    The model require professional knowledge to determine the threshold \\
+    \hline
 
-        % Third article
-        Autoencoder-based Condition Monitoring and Anomaly Detection Method for Rotating Machines \cite{ahmad_autoencoder-based_2020}&
-        LSTM, Framework & 
-        NASA bearing dataset & 
-        Use lstm AE to extract features and then use Gaussian model and Mahalanobis distance to determine if abnormal &
-        Use Isolation Forest model to evaluate high level features extracted (vs base data). High F1 score of 0.996 & 
-        Does not show/describe the model structure. The dataset is not closely related \\
-        \hline
-        
-        % 4th article 
-        Transfer learning applications for autoencoder-based anomaly detection in wind turbines & 
-        Multi-phrase training & 
-        SCADA & 
-        Train model on 1-year of common turbines data then tune the model by 1, 2 or 3-month data of the target data &
-        For transfer learning, tuning the model threshold is sufficient. Tuning the whole model or just the decoder only brings considerable improvement & 
-        The models tested are simple FCNN model \\
-        \hline
-    \end{tabular}
-\end{table}
+\end{longtable}
 
 \section{Literature Survey (60 marks)}
-Write a literature survey based on the five selected articles for your research question. The literature review should be \textbf{1000-1500 words} and should analyze and synthesize the findings from the articles, highlighting key themes, methodologies, and gaps in the existing research.
+% Write a literature survey based on the five selected articles for your research question. The literature review should be \textbf{1000-1500 words} and should analyze and synthesize the findings from the articles, highlighting key themes, methodologies, and gaps in the existing research.
 
 \section{References (10 marks)}
 % Ensure proper in-text citations and include a bibliography. You are free to use any recognized citation format (e.g., APA, MLA, Harvard, IEEE), but it must be consistent throughout your article.
 
-\bibliographystyle{plain}
+\bibliographystyle{apacite}
 \bibliography{assessment2.bib}
 
 \end{document}
